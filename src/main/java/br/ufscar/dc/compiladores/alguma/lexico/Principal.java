@@ -22,7 +22,7 @@ public class Principal {
     public static void main(String[] args) {
         // Terminar execução se os argumentos estiverem incorretos
         if(args.length != 2){
-            System.out.println("Argumento inválidos, use: " +
+            System.out.println("Argumentos inválidos, use: " +
                     "java -jar target/alguma-lexico-1.0-SNAPSHOT-jar-with-dependencies.jar"
                     + "<Caminho do arquivo de entrada>"
                     + "<Caminho do arquivo de saída>");
@@ -39,32 +39,34 @@ public class Principal {
             Token t = null;
 
             // Continua pegando tokens até achar o fim do arquivo
+            label:
             while ((t = lex.nextToken()).getType() != Token.EOF) {
                 String tokenId = AlgumaLexer.VOCABULARY.getDisplayName(t.getType()); // Token a ser analisada
 
                 // ANÁLISE LÉXICA --------------------------------------------------------------
-                // Erros da linguagem (Léxico não reconhecida, cadeias ou comentários abertos)
-                if(tokenId.equals("ERRO")) {
-                    pw.println("Linha " + t.getLine() + ": " + t.getText() + " - simbolo nao identificado"); // Erro de Simbolo
-                    break;
-                }
-                else if(tokenId.equals("CADEIA_NAO_FECHADA")) {
-                    pw.println("Linha " + t.getLine() + ": cadeia literal nao fechada"); // Cadeia não fechada
-                    break;
-                }
-                else if(tokenId.equals("COMENTARIO_NAO_FECHADO")) {
-                    pw.println("Linha " + t.getLine() + ": comentario nao fechado"); // Comentário não fechado
-                    break;
-                }
+                switch (tokenId) {
+                    // Erros da linguagem (Léxico não reconhecida, cadeias ou comentários abertos)
+                    case "ERRO":
+                        pw.println("Linha " + t.getLine() + ": " + t.getText() + " - simbolo nao identificado"); // Erro de Simbolo
+                        break label;
+                    case "CADEIA_ABERTA":
+                        pw.println("Linha " + t.getLine() + ": cadeia literal nao fechada"); // Cadeia não fechada
+                        break label;
+                    case "COMENTARIO_ABERTO":
+                        pw.println("Linha " + t.getLine() + ": comentario nao fechado"); // Comentário não fechado
+                        break label;
 
-                // Se o token não for nenhum erro
-                else {
-                    // Palavras-chave e operações são mostradas como tokens do próprio nome
-                    if(tokenId.equals("PALAVRA_CHAVE") || tokenId.equals("OP_ARIT") || tokenId.equals("OP_REL"))
+                    // Se o token não for nenhum erro
+                    case "PALAVRA_CHAVE":
+                    case "OP_ARIT":
+                    case "OP_REL":
+                    case "OP_ATR":
+                    case "OP_ACESSO":
                         pw.println("<'" + t.getText() + "','" + t.getText() + "'>");
-                    // Outros tokens são mostradas com o identificador do léxico
-                    else
-                        pw.println("<'" + t.getText() + "'," +  tokenId + ">"); //  Imprime o texto e o nome
+                        break;
+                    default:
+                        pw.println("<'" + t.getText() + "'," + tokenId + ">"); //  Imprime o texto e o nome
+                        break;
                 }
             }
         } catch (IOException ex) {
