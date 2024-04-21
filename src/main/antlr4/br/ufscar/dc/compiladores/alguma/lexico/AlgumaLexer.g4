@@ -54,8 +54,9 @@ OP_ACESSO : '.'  ;
 
 
 // Erros do código
-ERRO    :   . ;
-CADEIA_ABERTA : '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '\r'? '\n'?
+ERRO                :   .
         ;
-COMENTARIO_ABERTO : '{' ~('\n'|'\r'|'{'|'}' )* '\r'? '\n'?
+CADEIA_ABERTA       : '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '\r'? '\n'?
+        ;
+COMENTARIO_ABERTO   : '{' ~('\n'|'\r'|'{'|'}' )* '\r'? '\n'?
         ;
