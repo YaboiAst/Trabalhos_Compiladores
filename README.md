@@ -1,4 +1,5 @@
 # **Compiladores - Analisador Léxico**
+* Vitor Gabriel Orsin - 801575
 
 ## Pré-requisitos
 Para conseguir executar corretamente o programa, verifique a versão do Java e do Maven na sua máquina:
