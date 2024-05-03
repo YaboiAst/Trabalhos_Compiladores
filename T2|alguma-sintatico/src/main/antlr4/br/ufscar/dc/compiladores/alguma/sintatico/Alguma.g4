@@ -1,25 +1,28 @@
 grammar Alguma;
 
-// Definição de Escape
+// ESC
 fragment
 ESC_SEQ	: '\\\'';
 
-// Definição de Número para o AL
+// Tipos de números
 NUM_INT	 : ('0'..'9')+ ;
 NUM_REAL : ('0'..'9')+ ('.' ('0'..'9')+)? ;
 
-// Definição de Identificadores para o AL
+// Identificadores
 IDENT : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
 
-// Definição de WS para o AL
+// Espaços em branco
 WS : ( ' '| '\t' | '\r' | '\n' ) {skip();} ;
 
-// Definição de Comentario, Cadeia e seus respectivos erros para o AL
+// Comentário
 COMENTARIO : '{' ~('\n'|'\r'|'{'|'}' )* '}' '\r'? '\n'? {skip();} ;
+
+// Cadeia
 CADEIA :  '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '"' ;
 
-COMENTARIO_NAO_FECHADO: '{' ~('\n'|'\r'|'{'|'}' )* '\r'? '\n'? ;
-CADEIA_NAO_FECHADA: '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '\r'? '\n'? ;
+// Erros de comentário / cadeia sem fechamento
+COMENTARIO_ABERTO: '{' ~('\n'|'\r'|'{'|'}' )* '\r'? '\n'? ;
+CADEIA_ABERTA: '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '\r'? '\n'? ;
 
 // Sintatico
 programa: declaracoes 'algoritmo' corpo 'fim_algoritmo' EOF;

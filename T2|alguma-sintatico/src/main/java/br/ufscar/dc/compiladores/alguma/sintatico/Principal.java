@@ -36,16 +36,18 @@ public class Principal {
         String output = args[1];    // Caminho com o arquivo que armazenará os tokens
 
         try (PrintWriter pw = new PrintWriter(output)) {
+            // Inicializa alguma-parser
             CharStream cs = CharStreams.fromFileName(input); // Leitura do arquivo de entrada
             AlgumaLexer lex = new AlgumaLexer(cs); // instancia o analisador léxico
+            CommonTokenStream tokens = new CommonTokenStream(lex); // Gera a sequência de tokens
+            AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
 
-            CommonTokenStream tokens = new CommonTokenStream(lex);
-            AlgumaParser par = new AlgumaParser(tokens);
+            // Inicializa a classe de erro customizada
             ErrorListener errListener = new ErrorListener(pw);
-
             par.removeErrorListeners();
             par.addErrorListener(errListener);
 
+            // Analisa
             par.programa();
 
             pw.println("fim da compilação");
