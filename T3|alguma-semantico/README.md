@@ -29,6 +29,6 @@ java -jar target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar ~/path/
 ## Rodando com o corretor
 Para executar o corretor disponibilizado pelo professor (https://github.com/dlucredio/compiladores-corretor-automatico/), use o seguinte comando na pasta do programa corretor:
 ```
-java -jar target/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar ~/{path/to/parser}/T2|alguma-semantico/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" gcc ~/temp ~//TestFiles/casos-de-teste/casos-de-teste/ "RA" gabarito-t3
+java -jar target/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar ~/{path/to/parser}/T3|alguma-semantico/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" gcc ~/temp ~//TestFiles/casos-de-teste/casos-de-teste/ "RA" gabarito-t3
 
 ```
