@@ -45,14 +45,15 @@ public class Principal {
             CommonTokenStream tokens = new CommonTokenStream(lex); // Gera a sequência de tokens
             AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
 
-            // Inicializa a classe de erro customizada
-//            ErrorListener errListener = new ErrorListener(pw);
-//            par.removeErrorListeners();
-//            par.addErrorListener(errListener);
-
             // Analisa
-            par.programa();
+            AlgumaParser.ProgramaContext tree = par.programa();
 
+            AlgumaSemantico semantico = new AlgumaSemantico();
+            semantico.visitPrograma(tree);
+
+            for (String error : AlgumaSemanticoUtils.errosSemanticos){
+                pw.println(error);
+            }
             pw.println("Fim da compilação");
         }
         catch (IOException ex) {
