@@ -1,0 +1,11 @@
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaBaseListener.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaLexer.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/src/main/java/br/ufscar/dc/compiladores/alguma/parser/TabelaDeSimbolos.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/src/main/java/br/ufscar/dc/compiladores/alguma/parser/AlgumaSemantico.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaBaseVisitor.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaParser.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaVisitor.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/generated-sources/antlr4/br/ufscar/dc/compiladores/expr/parser/AlgumaListener.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/src/main/java/br/ufscar/dc/compiladores/alguma/parser/Principal.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/src/main/java/br/ufscar/dc/compiladores/alguma/parser/AlgumaSemanticoUtils.java
+/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/src/main/java/br/ufscar/dc/compiladores/alguma/parser/Escopo.java

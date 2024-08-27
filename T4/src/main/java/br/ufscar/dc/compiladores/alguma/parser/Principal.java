@@ -38,23 +38,24 @@ public class Principal {
         String output = args[1];    // Caminho com o arquivo que armazenará os tokens
 
         try (PrintWriter pw = new PrintWriter(output)) {
-            // Inicializa alguma-parser
             CharStream cs = CharStreams.fromFileName(input); // Leitura do arquivo de entrada
+
+            // Gera Tokens
             AlgumaLexer lex = new AlgumaLexer(cs); // instancia o analisador léxico
-
             CommonTokenStream tokens = new CommonTokenStream(lex); // Gera a sequência de tokens
-            AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
 
-            // Analisa
+            // Analise sinstatica
+            AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
             AlgumaParser.ProgramaContext tree = par.programa();
 
+            // Analise semantica
             AlgumaSemantico semantico = new AlgumaSemantico();
             semantico.visitPrograma(tree);
 
             for (String error : AlgumaSemanticoUtils.errosSemanticos){
                 pw.println(error);
             }
-            pw.println("Fim da compilação");
+            pw.println("Fim da compilacao");
         }
         catch (IOException ex) {
             System.err.println("Arquivo não encontrado: "+ args[1]);

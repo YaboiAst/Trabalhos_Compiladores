@@ -1,15 +1,16 @@
+br/ufscar/dc/compiladores/alguma/parser/TabelaDeSimbolos$StructAlguma.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$ConstantesContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Item_selecaoContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op_logico_2Context.class
 br/ufscar/dc/compiladores/alguma/parser/Escopo.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$RegistroContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op3Context.class
-br/ufscar/dc/compiladores/alguma/parser/TabelaDeSimbolos$1.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Parcela_nao_unarioContext.class
 br/ufscar/dc/compiladores/alguma/parser/TabelaDeSimbolos$EntradaTabelaDeSimbolos.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op1Context.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Tipo_basico_identContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op_unarioContext.class
+br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Declaracao_variavelContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Numero_intervaloContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$DeclaracoesContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op_relacionalContext.class
@@ -51,7 +52,9 @@ br/ufscar/dc/compiladores/expr/parser/AlgumaParser$CmdContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$CmdChamadaContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$CmdFacaContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Declaracao_globalContext.class
+br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Declaracao_tipoContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$FatorContext.class
+br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Declaracao_constanteContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$VariavelContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Exp_aritmeticaContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$ParametroContext.class

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="br.ufscar.dc.compiladores.alguma.parser.AppTest" time="0.047" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="br.ufscar.dc.compiladores.alguma.parser.AppTest" time="0.066" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire/surefirebooter1775147781127971535.jar /home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire 2024-08-08T21-05-34_288-jvmRun1 surefire928372496245069656tmp surefire_017607764319564529027tmp"/>
+    <property name="sun.java.command" value="/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire/surefirebooter8813501128689341645.jar /home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire 2024-08-26T21-23-34_896-jvmRun1 surefire496323623122743617tmp surefire_09809144745126824918tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/test-classes:/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/classes:/home/ast/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/ast/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/ast/.m2/repository/org/antlr/antlr4/4.11.1/antlr4-4.11.1-complete.jar:/home/ast/.m2/repository/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/home/ast/.m2/repository/org/antlr/antlr-runtime/3.5.3/antlr-runtime-3.5.3.jar:/home/ast/.m2/repository/org/antlr/ST4/4.3.4/ST4-4.3.4.jar:/home/ast/.m2/repository/org/abego/treelayout/org.abego.treelayout.core/1.0.3/org.abego.treelayout.core-1.0.3.jar:/home/ast/.m2/repository/org/glassfish/javax.json/1.1.4/javax.json-1.1.4.jar:/home/ast/.m2/repository/com/ibm/icu/icu4j/71.1/icu4j-71.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,12 +27,12 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire/surefirebooter1775147781127971535.jar"/>
+    <property name="surefire.real.class.path" value="/home/ast/Faculdade/Compiladores/Trabalhos_Compiladores/T4/target/surefire/surefirebooter8813501128689341645.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.12+7-Ubuntu-1ubuntu222.04"/>
     <property name="user.name" value="ast"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="6.5.0-44-generic"/>
+    <property name="os.version" value="6.8.0-40-generic"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
