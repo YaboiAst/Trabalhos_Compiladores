@@ -271,7 +271,7 @@ public class AlgumaSemanticoUtils {
     public static String getTipoToC(String tipo){
         switch (tipo){
             case "literal":
-                return "char*";
+                return "char";
             case "inteiro":
                 return "int";
             case "real":
