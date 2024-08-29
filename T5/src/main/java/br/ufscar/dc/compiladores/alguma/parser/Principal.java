@@ -15,11 +15,11 @@ import java.io.PrintWriter;
 /*
  * Vitor Gabriel Orsin - 801575
  *
- * T4
- * Implementar um analisador semântica que consegue identificar a linguagem LA
+ * T5
+ * Implementar um compilador para converter código em Alguma para C
  *
- * Lê um arquivo de entrada que contenha o código em LA e verifica por erros de sintaxe
- * em um arquivo de saída especificados nos argumentos
+ * Lê um arquivo de entrada que contenha o código em LA
+ * Escreve o código correspondente em C em um arquivo de saída
  * */
 
 public class Principal {
@@ -38,23 +38,39 @@ public class Principal {
         String output = args[1];    // Caminho com o arquivo que armazenará os tokens
 
         try (PrintWriter pw = new PrintWriter(output)) {
-            // Inicializa alguma-parser
             CharStream cs = CharStreams.fromFileName(input); // Leitura do arquivo de entrada
+
+            // Gera Tokens
             AlgumaLexer lex = new AlgumaLexer(cs); // instancia o analisador léxico
-
             CommonTokenStream tokens = new CommonTokenStream(lex); // Gera a sequência de tokens
-            AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
 
-            // Analisa
+            // Analise sinstatica
+            AlgumaParser par = new AlgumaParser(tokens); // instancia o parser
             AlgumaParser.ProgramaContext tree = par.programa();
 
+            // Analise semantica
             AlgumaSemantico semantico = new AlgumaSemantico();
             semantico.visitPrograma(tree);
 
-            for (String error : AlgumaSemanticoUtils.errosSemanticos){
-                pw.println(error);
+            if (!AlgumaSemanticoUtils.errosSemanticos.isEmpty())
+            {
+                for (String error : AlgumaSemanticoUtils.errosSemanticos)
+                {
+                    pw.println(error);
+                }
+
+                pw.close();
+                return;
             }
-            pw.println("Fim da compilação");
+            pw.close();
+
+            // ESCRITA DO CÓDIGO EM C
+            AlgumaToC converter = new AlgumaToC();
+            converter.visitPrograma(tree);
+
+            PrintWriter cWriter = new PrintWriter(args[1]);
+            cWriter.print(converter.cOutput.toString());
+            cWriter.close();
         }
         catch (IOException ex) {
             System.err.println("Arquivo não encontrado: "+ args[1]);

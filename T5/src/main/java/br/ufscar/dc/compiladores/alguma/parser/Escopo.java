@@ -6,13 +6,19 @@ import java.util.List;
 public class Escopo {
     private LinkedList<TabelaDeSimbolos> pilhaTabela;
 
-    public Escopo(){
+    public Escopo(TabelaDeSimbolos.TipoAlguma tipo){
         pilhaTabela = new LinkedList<>();
-        novoEscopo();
+        novoEscopo(tipo);
     }
 
-    public void novoEscopo() {
-        pilhaTabela.push(new TabelaDeSimbolos());
+    public Escopo(TabelaDeSimbolos simbolos)
+    {
+        pilhaTabela = new LinkedList<>();
+        pilhaTabela.push(simbolos);
+    }
+
+    public void novoEscopo(TabelaDeSimbolos.TipoAlguma tipo) {
+        pilhaTabela.push(new TabelaDeSimbolos(tipo));
     }
 
     public TabelaDeSimbolos getEscopo(){

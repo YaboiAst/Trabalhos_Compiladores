@@ -1,41 +1,78 @@
 package br.ufscar.dc.compiladores.alguma.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TabelaDeSimbolos {
     public enum TipoAlguma{
+        INVALIDO,
         INTEIRO,
         REAL,
-        INVALIDO,
 
-        CADEIA,
-        LOGICO,
-        TIPO,
+        CADEIA,   // Char/ String
+        LOGICO,   // Booleano
 
-        REGISTRO,
-        PONTEIRO,
-        FUNC,
-
-        TEMP
+        REGISTRO, // Registro
+        VOID      // Parametro
     }
 
-    class EntradaTabelaDeSimbolos{
+    public enum StructAlguma{
+        VAR,    // Variável
+        TIPO,   // Declaracao de tipo
+        CONST,  // Constante
+        PROC,   // Processo
+        FUNC    // Funcao
+
+    }
+
+    public class EntradaTabelaDeSimbolos{
         String nome;
         TipoAlguma tipo;
+        StructAlguma struct;
 
-        private EntradaTabelaDeSimbolos(String nome, TipoAlguma tipo){
+        public EntradaTabelaDeSimbolos(String nome, TipoAlguma tipo, StructAlguma struct){
             this.nome = nome;
             this.tipo = tipo;
+            this.struct = struct;
         }
     }
 
+    public TipoAlguma tipo;
     private final Map<String, EntradaTabelaDeSimbolos> tabela;
+    private final Map<String, ArrayList<EntradaTabelaDeSimbolos>> tabelaTipo;
 
-    public TabelaDeSimbolos() { this.tabela = new HashMap<>(); }
+    public TabelaDeSimbolos(TipoAlguma tipo) {
+        this.tabela = new HashMap<>();
+        this.tabelaTipo = new HashMap<>();
+        this.tipo = tipo;
+    }
 
-    public void adicionar(String nome, TipoAlguma tipo){
-        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipo));
+    public TabelaDeSimbolos() {
+        this.tabela = new HashMap<>();
+        this.tabelaTipo = new HashMap<>();
+    }
+
+    public ArrayList<EntradaTabelaDeSimbolos> getTipoTabela(String tipo){
+        return tabelaTipo.get(tipo);
+    }
+
+    public void adicionar(EntradaTabelaDeSimbolos input){
+        tabela.put(input.nome, input);
+
+    }
+
+    public void adicionar(String tipo, EntradaTabelaDeSimbolos input){
+        if (tabelaTipo.containsKey(tipo)) tabelaTipo.get(tipo).add(input);
+        else{
+            ArrayList<EntradaTabelaDeSimbolos> novoTipo = new ArrayList<>();
+            novoTipo.add(input);
+            tabelaTipo.put(tipo, novoTipo);
+        }
+    }
+
+    public void adicionar(String nome, TipoAlguma tipo, StructAlguma struct) {
+        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipo, struct)); // Adicionado struct
     }
 
     public boolean existe(String nome){

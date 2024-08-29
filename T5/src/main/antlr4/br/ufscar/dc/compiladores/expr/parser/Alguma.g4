@@ -28,11 +28,13 @@ CADEIA_ABERTA: '"' (~( '"'|'\\' |'\n'|'\r')| ESC_SEQ)* '\r'? '\n'? ;
 programa: declaracoes 'algoritmo' corpo 'fim_algoritmo' EOF;
 
 declaracoes: (declaracao_local | declaracao_global)*;
-declaracao_local: 'declare' variavel
-    | 'constante' IDENT ':' tipo_basico '=' valor_constante
-    | 'tipo' IDENT ':' tipo;
-declaracao_global: 'procedimento' IDENT '(' parametros? ')' corpo 'fim_procedimento'
-    | 'funcao' IDENT '(' parametros? ')' ':' tipo_estendido corpo 'fim_funcao';
+declaracao_local: declaracao_variavel | declaracao_constante | declaracao_tipo;
+declaracao_global: 'procedimento' IDENT '(' parametros? ')' corpo 'fim_procedimento' |
+                   'funcao' IDENT '(' parametros? ')' ':' tipo_estendido corpo 'fim_funcao';
+
+declaracao_variavel: 'declare' variavel;
+declaracao_constante: 'constante' IDENT ':' tipo_basico '=' valor_constante;
+declaracao_tipo: 'tipo' IDENT ':' tipo;
 
 variavel: identificador (',' identificador)* ':' tipo;
 identificador: IDENT ('.' IDENT)* dimensao;
@@ -52,7 +54,8 @@ corpo: declaracao_local* cmd*;
 cmd: cmdLeia | cmdEscreva | cmdSe | cmdCaso | cmdPara | cmdEnquanto | cmdFaca | cmdAtribuicao | cmdChamada | cmdRetorne;
 cmdLeia: 'leia' '(' '^'? identificador (',' '^'? identificador)* ')';
 cmdEscreva: 'escreva' '(' expressao (',' expressao)* ')';
-cmdSe: 'se' expressao 'entao' cmd* ('senao' cmd*)? 'fim_se';
+cmdSe: 'se' expressao 'entao' cmd* (cmdSenao)? 'fim_se';
+cmdSenao: 'senao' cmd*;
 cmdCaso: 'caso' exp_aritmetica 'seja' selecao ('senao' cmd*)? 'fim_caso';
 cmdPara: 'para' IDENT '<-' exp_aritmetica 'ate' exp_aritmetica 'faca' cmd* 'fim_para';
 cmdEnquanto: 'enquanto' expressao 'faca' cmd* 'fim_enquanto';

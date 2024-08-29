@@ -11,21 +11,21 @@ public class AlgumaSemanticoUtils {
 
     public static void adicionarErroSemantico(Token t, String mensagem){
         int linha = t.getLine();
-        int coluna = t.getCharPositionInLine();
 
-        errosSemanticos.add(String.format("Linha %d:%d - %s", linha, coluna, mensagem));
+        errosSemanticos.add(String.format("Linha %d: %s", linha, mensagem));
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.ExpressaoContext ctx)  {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        // Para cada expressão aritmético, verifica o tipo
         for (var tl : ctx.termo_logico()) {
             TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, tl);
 
-            // Sistema de Troca
-            if (ret == null) {
+            if (ret == null)
+            {
                 ret = aux;
-            } else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
+            }
+            else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
             }
         }
@@ -34,19 +34,20 @@ public class AlgumaSemanticoUtils {
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.Termo_logicoContext ctx) {
-
         TabelaDeSimbolos.TipoAlguma ret = null;
-        // Para cada fator aritmético, verifica o tipo
         for (var fl : ctx.fator_logico()) {
             TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, fl);
 
-            // Sistema de Troca
-            if (ret == null) {
+            if (ret == null)
+            {
                 ret = aux;
-            } else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
+            }
+            else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
             }
         }
+
         return ret;
     }
 
@@ -56,11 +57,13 @@ public class AlgumaSemanticoUtils {
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.Parcela_logicaContext ctx) {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        if(ctx.exp_relacional() != null) {
-            ret = verificarTipo(escopo, ctx.exp_relacional()); // Verifica o tipo da expressão relacional
+        if(ctx.exp_relacional() != null)
+        {
+            ret = verificarTipo(escopo, ctx.exp_relacional());
         }
-        else{
-            ret = TabelaDeSimbolos.TipoAlguma.LOGICO; // Tipo Lógico
+        else
+        {
+            ret = TabelaDeSimbolos.TipoAlguma.LOGICO;
         }
 
         return ret;
@@ -68,24 +71,31 @@ public class AlgumaSemanticoUtils {
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.Exp_relacionalContext ctx){
         TabelaDeSimbolos.TipoAlguma ret = null;
-        if(ctx.op_relacional() != null) {
-            for(var ea : ctx.exp_aritmetica()) {
+        if(ctx.op_relacional() != null)
+        {
+            for(var ea : ctx.exp_aritmetica())
+            {
                 TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, ea);
                 Boolean auxNumeric = aux == TabelaDeSimbolos.TipoAlguma.INTEIRO || aux == TabelaDeSimbolos.TipoAlguma.REAL;
                 Boolean retNumeric = ret == TabelaDeSimbolos.TipoAlguma.INTEIRO || ret == TabelaDeSimbolos.TipoAlguma.REAL;
 
-                if(ret == null) {
+                if(ret == null)
+                {
                     ret = aux;
-                }else if(!(auxNumeric && retNumeric) && aux != ret) { // Não são nulos e são diferentes
+                }
+                else if(!(auxNumeric && retNumeric) && aux != ret)
+                {
                     ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
                 }
             }
 
-            if(ret != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
+            if(ret != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.LOGICO;
             }
         }
-        else {
+        else
+        {
             ret = verificarTipo(escopo, ctx.exp_aritmetica(0));
         }
 
@@ -94,12 +104,16 @@ public class AlgumaSemanticoUtils {
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.Exp_aritmeticaContext ctx) {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        for(var ta : ctx.termo()) {
+        for(var ta : ctx.termo())
+        {
             TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, ta);
 
-            if(ret == null) {
+            if(ret == null)
+            {
                 ret = aux;
-            }else if(ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
+            }
+            else if(ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
             }
         }
@@ -109,28 +123,37 @@ public class AlgumaSemanticoUtils {
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.TermoContext ctx) {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        for(var fc : ctx.fator()) {
+        for(var fc : ctx.fator())
+        {
             TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, fc);
             Boolean auxNumeric = aux == TabelaDeSimbolos.TipoAlguma.INTEIRO || aux == TabelaDeSimbolos.TipoAlguma.REAL;
             Boolean retNumeric = ret == TabelaDeSimbolos.TipoAlguma.INTEIRO || ret == TabelaDeSimbolos.TipoAlguma.REAL;
 
-            if(ret == null) {
+            if(ret == null)
+            {
                 ret = aux;
-            }else if(!(auxNumeric && retNumeric) && aux != ret) {
+            }
+            else if(!(auxNumeric && retNumeric) && aux != ret)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
             }
         }
+
         return ret;
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.FatorContext ctx) {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        for(var pc : ctx.parcela()) {
+        for(var pc : ctx.parcela())
+        {
             TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, pc);
 
-            if(ret == null) {
+            if(ret == null)
+            {
                 ret = aux;
-            }else if(ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
+            }
+            else if(ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+            {
                 ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
             }
         }
@@ -140,11 +163,12 @@ public class AlgumaSemanticoUtils {
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.ParcelaContext ctx)  {
         TabelaDeSimbolos.TipoAlguma ret = null;
-        if(ctx.parcela_nao_unario() != null) {
+        if(ctx.parcela_nao_unario() != null)
+        {
             ret = verificarTipo(escopo, ctx.parcela_nao_unario());
-
         }
-        else{
+        else
+        {
             ret = verificarTipo(escopo, ctx.parcela_unario());
         }
 
@@ -152,7 +176,8 @@ public class AlgumaSemanticoUtils {
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo,AlgumaParser.Parcela_nao_unarioContext ctx) {
-        if(ctx.identificador() != null) {
+        if(ctx.identificador() != null)
+        {
             return verificarTipo(escopo, ctx.identificador());
         }
 
@@ -163,16 +188,19 @@ public class AlgumaSemanticoUtils {
         String nomeVar = "";
         TabelaDeSimbolos.TipoAlguma ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
 
-        for(int i = 0; i < ctx.IDENT().size(); i++) {
+        for(int i = 0; i < ctx.IDENT().size(); i++)
+        {
             nomeVar += ctx.IDENT(i).getText();
-            if(i != ctx.IDENT().size() - 1) {
+            if(i != ctx.IDENT().size() - 1)
+            {
                 nomeVar += ".";
             }
         }
 
         for(TabelaDeSimbolos tabela : escopo.getPilhaTabela()) {
-            if(tabela.existe(nomeVar)) { // Se existir
-                ret = verificarTipo(escopo, nomeVar); // Pegar nome tabela
+            if(tabela.existe(nomeVar))
+            {
+                ret = verificarTipo(escopo, nomeVar);
             }
         }
 
@@ -180,42 +208,27 @@ public class AlgumaSemanticoUtils {
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, AlgumaParser.Parcela_unarioContext ctx) {
-        if(ctx.NUM_INT() != null) {
+        if(ctx.NUM_INT() != null)
             return TabelaDeSimbolos.TipoAlguma.INTEIRO; // Inteiro
-        }
-        if(ctx.NUM_REAL() != null) {
+        if(ctx.NUM_REAL() != null)
             return TabelaDeSimbolos.TipoAlguma.REAL; // Real
-        }
-        if(ctx.identificador() != null) {
+        if(ctx.identificador() != null)
             return verificarTipo(escopo, ctx.identificador());
-        }
-
-        if (ctx.IDENT() != null) {
-
+        if (ctx.IDENT() != null)
+            return verificarTipo(escopo, ctx.IDENT().getText());
+        else{
             TabelaDeSimbolos.TipoAlguma ret = null;
-            ret = verificarTipo(escopo,ctx.IDENT().getText());
 
-            for(var ec : ctx.expressao()) {
+            for(var ec : ctx.expressao())
+            {
                 TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, ec);
 
-                if(ret == null) {
+                if(ret == null)
+                {
                     ret = aux;
-                }else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO) {
-                    ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
                 }
-            }
-
-            return ret;
-
-        }
-        else {
-            TabelaDeSimbolos.TipoAlguma ret = null;
-            for(var ec : ctx.expressao()) {
-                TabelaDeSimbolos.TipoAlguma aux = verificarTipo(escopo, ec);
-
-                if(ret == null) {
-                    ret = aux;
-                }else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO){
+                else if (ret != aux && aux != TabelaDeSimbolos.TipoAlguma.INVALIDO)
+                {
                     ret = TabelaDeSimbolos.TipoAlguma.INVALIDO;
                 }
             }
@@ -225,27 +238,55 @@ public class AlgumaSemanticoUtils {
     }
 
     public static TabelaDeSimbolos.TipoAlguma verificarTipo(Escopo escopo, String nomeVar) {
-        TabelaDeSimbolos.TipoAlguma type = null;
+        TabelaDeSimbolos.TipoAlguma type = TabelaDeSimbolos.TipoAlguma.INVALIDO;
 
-        for(TabelaDeSimbolos tabela : escopo.getPilhaTabela()) {
-            type = tabela.verificar(nomeVar);
+        for(TabelaDeSimbolos tabela : escopo.getPilhaTabela())
+        {
+            if (tabela.existe(nomeVar))
+            {
+                return tabela.verificar(nomeVar);
+            }
         }
 
         return type;
     }
 
-    public static String convertToC(String tipoAlguma){
-        switch (tipoAlguma.toLowerCase())
-        {
+    public static TabelaDeSimbolos.TipoAlguma getTipo(String tipo){
+        switch (tipo){
+            case "literal":
+                return TabelaDeSimbolos.TipoAlguma.CADEIA;
+            case "inteiro":
+                return TabelaDeSimbolos.TipoAlguma.INTEIRO;
+            case "real":
+                return TabelaDeSimbolos.TipoAlguma.REAL;
+            case "logico":
+                return TabelaDeSimbolos.TipoAlguma.LOGICO;
+            default:
+                return null;
+        }
+    }
+
+
+    // Usados para escrever em C
+    public static String getTipoToC(String tipo){
+        switch (tipo){
+            case "literal":
+                return "char*";
             case "inteiro":
                 return "int";
             case "real":
                 return "float";
-            case "literal":
-                return "char*";
             default:
-                return "";
+                return null;
         }
     }
 
+    public static String getTipoAlgumToC(TabelaDeSimbolos.TipoAlguma tipo){
+        switch (tipo){
+            case INTEIRO: return "d";
+            case REAL: return "f";
+            case CADEIA: return "s";
+            default: return null;
+        }
+    }
 }
