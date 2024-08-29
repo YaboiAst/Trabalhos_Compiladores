@@ -23,12 +23,12 @@ Utilize o java para executar o programa, passando os argumentos:
 * O caminho literal até o arquivo contendo o código em LA
 * O caminho literal até o arquivo onde o programa escreverá a saída
 ```
-java -jar target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar ~/path/to/input/file.txt ~/path/to/output/file.txt
+java -jar target/alguma-t4-1.0-SNAPSHOT-jar-with-dependencies.jar ~/path/to/input/file.txt ~/path/to/output/file.txt
 ```
 
 ## Rodando com o corretor
 Para executar o corretor disponibilizado pelo professor (https://github.com/dlucredio/compiladores-corretor-automatico/), use o seguinte comando na pasta do programa corretor:
 ```
-java -jar target/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar ~/{path/to/parser}/T4/target/alguma-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar" gcc ~/temp ~//TestFiles/casos-de-teste/casos-de-teste/ "RA" gabarito-t4
+java -jar target/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar ~/{path/to/parser}/T4/target/alguma-t4-1.0-SNAPSHOT-jar-with-dependencies.jar" gcc ~/temp ~//TestFiles/casos-de-teste/casos-de-teste/ "RA" t4
 
 ```
