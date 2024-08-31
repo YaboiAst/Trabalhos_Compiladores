@@ -326,6 +326,13 @@ public class AlgumaBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitExpressao_par(AlgumaParser.Expressao_parContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitParcela_nao_unario(AlgumaParser.Parcela_nao_unarioContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

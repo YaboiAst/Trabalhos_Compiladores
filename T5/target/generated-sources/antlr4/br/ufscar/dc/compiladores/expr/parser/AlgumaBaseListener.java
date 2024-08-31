@@ -545,6 +545,18 @@ public class AlgumaBaseListener implements AlgumaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpressao_par(AlgumaParser.Expressao_parContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressao_par(AlgumaParser.Expressao_parContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParcela_nao_unario(AlgumaParser.Parcela_nao_unarioContext ctx) { }
 	/**
 	 * {@inheritDoc}

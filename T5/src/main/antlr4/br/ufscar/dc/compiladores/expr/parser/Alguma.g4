@@ -2,7 +2,7 @@ grammar Alguma;
 
 // ESC
 fragment
-ESC_SEQ	: '\\\'';
+ESC_SEQ	: '\\\'' | '\\n';
 
 // Tipos de números
 NUM_INT	 : ('0'..'9')+ ;
@@ -81,7 +81,8 @@ parcela: op_unario? parcela_unario | parcela_nao_unario;
 parcela_unario: '^'? identificador
     | IDENT '(' expressao (',' expressao)* ')'
     | NUM_INT | NUM_REAL
-    | '(' expressao ')';
+    | '(' expressao_par ')';
+expressao_par: expressao;
 parcela_nao_unario: '&' identificador | CADEIA;
 exp_relacional: exp_aritmetica (op_relacional exp_aritmetica)?;
 

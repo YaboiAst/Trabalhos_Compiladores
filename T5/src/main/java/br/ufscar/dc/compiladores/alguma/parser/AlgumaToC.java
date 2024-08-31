@@ -88,13 +88,15 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
         cOutput.append("){\n");
 
         // Declaracoes da funcao
-        ctx.corpo().declaracao_local().forEach(this::visitDeclaracao_local);
-        cOutput.append("\n");
+        if (ctx.corpo().declaracao_local() != null){
+            ctx.corpo().declaracao_local().forEach(this::visitDeclaracao_local);
+            cOutput.append("\n");
+        }
 
         // Comandos da funcao
         ctx.corpo().cmd().forEach(this::visitCmd);
 
-        cOutput.append("}\n");
+        cOutput.append("}\n\n");
 
         return null;
     }
@@ -110,9 +112,10 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
                 cOutput.append(",");
 
             visitTipo_estendido(ctx.tipo_estendido());
+            if (tipoC != null && tipoC.equals("char")) cOutput.append("*");
+            cOutput.append(" ");
             visitIdentificador(id);
 
-            if (tipoC.equals("char")) cOutput.append("[5]");
             tabela.adicionar(id.getText(), tipo, TabelaDeSimbolos.StructAlguma.VAR);
         }
 
@@ -296,7 +299,7 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
             cOutput.append(" ");
             visitIdentificador(id);
 
-            if (tipoC.equals("char")) cOutput.append("[10]");
+            if (tipoC != null && tipoC.equals("char")) cOutput.append("[64]");
 
             cOutput.append(";\n");
         }
@@ -489,12 +492,11 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
             }
             cOutput.append(")");
         }
-        else if (ctx.expressao() != null) // (Expressao)
+        else if (ctx.expressao_par() != null) // (Expressao)
         {
             cOutput.append("(");
-            visitExpressao(ctx.expressao(0));
+            visitExpressao(ctx.expressao_par().expressao());
             cOutput.append(")");
-
         }
         else // Valor
         {
@@ -571,6 +573,13 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
             }
             else
             {
+                // Versão sem gets não passa no caso de teste ???
+//                cOutput.append("fgets(");
+//                visitIdentificador(id);
+//                cOutput.append(", sizeof(");
+//                visitIdentificador(id);
+//                cOutput.append("), stdin);\n");
+
                 cOutput.append("gets(");
                 visitIdentificador(id);
                 cOutput.append(");\n");
@@ -586,16 +595,17 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
             Escopo escopo = new Escopo(tabela);
             String tipoC = AlgumaSemanticoUtils.getTipoAlgumToC(AlgumaSemanticoUtils.verificarTipo(escopo, exp));
 
-            if (tabela.existe(exp.getText())) {
+            if (tabela.existe(exp.getText()))
+            {
                 TabelaDeSimbolos.TipoAlguma tipo = tabela.verificar(exp.getText());
                 tipoC = AlgumaSemanticoUtils.getTipoAlgumToC(tipo);
             }
 
+
             cOutput.append("printf(\"%")
                     .append(tipoC)
-                    .append("\", ");
-
-            cOutput.append(exp.getText())
+                    .append("\", ")
+                    .append(exp.getText())
                     .append(");\n");
         }
 
@@ -607,9 +617,19 @@ public class AlgumaToC extends AlgumaBaseVisitor<Void> {
     public Void visitCmdAtribuicao(AlgumaParser.CmdAtribuicaoContext ctx) {
         if (ctx.getText().contains("^")) cOutput.append("*");
 
+        TabelaDeSimbolos.TipoAlguma tipoIdentificador = AlgumaSemanticoUtils.verificarTipo(new Escopo(tabela), ctx.identificador());
+        if (tipoIdentificador == TabelaDeSimbolos.TipoAlguma.CADEIA){
+            cOutput.append("strcpy(");
+            visitIdentificador(ctx.identificador());
+            cOutput.append(", ")
+                    .append(ctx.expressao().getText())
+                    .append(");\n");
+
+            return null;
+        }
+
         // ID = EXP
         visitIdentificador(ctx.identificador());
-
         cOutput.append(" = ")
                 .append(ctx.expressao().getText())
                 .append(";\n");

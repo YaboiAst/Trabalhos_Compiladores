@@ -13,6 +13,7 @@ br/ufscar/dc/compiladores/expr/parser/AlgumaParser$CmdSenaoContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op_unarioContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Declaracao_variavelContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Numero_intervaloContext.class
+br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Expressao_parContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$DeclaracoesContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaParser$Op_relacionalContext.class
 br/ufscar/dc/compiladores/expr/parser/AlgumaBaseVisitor.class

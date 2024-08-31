@@ -275,6 +275,12 @@ public interface AlgumaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParcela_unario(AlgumaParser.Parcela_unarioContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AlgumaParser#expressao_par}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressao_par(AlgumaParser.Expressao_parContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AlgumaParser#parcela_nao_unario}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

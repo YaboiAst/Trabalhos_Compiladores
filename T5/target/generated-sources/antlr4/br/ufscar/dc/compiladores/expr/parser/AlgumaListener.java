@@ -448,6 +448,16 @@ public interface AlgumaListener extends ParseTreeListener {
 	 */
 	void exitParcela_unario(AlgumaParser.Parcela_unarioContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AlgumaParser#expressao_par}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressao_par(AlgumaParser.Expressao_parContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AlgumaParser#expressao_par}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressao_par(AlgumaParser.Expressao_parContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AlgumaParser#parcela_nao_unario}.
 	 * @param ctx the parse tree
 	 */
